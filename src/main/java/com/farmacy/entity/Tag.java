@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -19,12 +20,12 @@ import lombok.NonNull;
 @Data
 public class Tag {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@NonNull
 	private String title;
 	
-	@ManyToMany(mappedBy = "tags")
+	@ManyToMany
 	List<Meal> meals = new ArrayList<Meal>();
 }
