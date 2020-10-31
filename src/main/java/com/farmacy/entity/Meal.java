@@ -2,14 +2,11 @@ package com.farmacy.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -22,6 +19,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @AllArgsConstructor
 @Data
 @Builder
+@Table(name = "meals")
 public class Meal {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -48,7 +46,14 @@ public class Meal {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
-    
-    @ManyToMany(mappedBy = "meals")
-	List<Tag> tags = new ArrayList<Tag>();
+
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+			})
+	@JoinTable(name = "meals_tags",
+			joinColumns = { @JoinColumn(name = "meal_id") },
+			inverseJoinColumns = { @JoinColumn(name = "tag_id") })
+	private Set<Tag> tags = new HashSet<>();
 }

@@ -1,5 +1,6 @@
 package com.farmacy.controller;
 
+import com.farmacy.dto.MealRequestDto;
 import com.farmacy.entity.Meal;
 import com.farmacy.service.MealsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class MealsController {
     }
 
     @PostMapping(path="/meals")
-    public Meal create(@Valid @RequestBody Meal meal) {
-        return mealsService.saveMeal(meal);
+    public Meal create(@Valid @RequestBody MealRequestDto mealRequestDto) {
+        return mealsService.saveMeal(mealRequestDto);
     }
 }
