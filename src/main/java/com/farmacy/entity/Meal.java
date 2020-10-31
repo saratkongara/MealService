@@ -11,20 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class Meal {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

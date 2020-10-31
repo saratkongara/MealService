@@ -2,7 +2,6 @@ package com.farmacy.service;
 
 import com.farmacy.entity.Tag;
 import com.farmacy.repository.TagsRepository;
-import org.hibernate.service.spi.InjectService;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,13 +17,13 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TagServiceTest {
+public class TagsServiceTest {
 
     @Mock
     TagsRepository tagsRepository;
 
     @InjectMocks
-    TagService tagService;
+    TagsService tagsService;
 
     @Before
     public void before() {
@@ -43,11 +42,11 @@ public class TagServiceTest {
 
     @Test
     public void getTags() {
-        Assert.assertEquals(tagService.getTags().get(0).getTitle(), "Shubham");
+        Assert.assertEquals(tagsService.getTags().get(0).getTitle(), "Shubham");
     }
 
     @Test
     public void saveTag() {
-        Assert.assertEquals(tagService.saveTag(Tag.builder().title("Shubham").build()).getTitle(), "Shubham");
+        Assert.assertEquals(tagsService.saveTag(Tag.builder().title("Shubham").build()).getTitle(), "Shubham");
     }
 }
